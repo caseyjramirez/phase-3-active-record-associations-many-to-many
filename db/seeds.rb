@@ -1,7 +1,11 @@
 puts "🌱 Seeding data..."
 
+25.times do
+  User.create( name: Faker::Name.name)
+end
+
 # run a loop 50 times
-50.times do
+100.times do
   # create a game with random data
   game = Game.create(
     title: Faker::Game.title,
@@ -15,7 +19,8 @@ puts "🌱 Seeding data..."
     Review.create(
       score: rand(1..10),
       comment: Faker::Lorem.sentence,
-      game_id: game.id # use the ID (primary key) of the game as the foreign key
+      game_id: game.id, 
+      user_id: User.all.sample.id
     )
   end
 end
